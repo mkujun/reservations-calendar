@@ -26,7 +26,7 @@
     <th>N2</th>
     <td
       [ngClass]="{ 'td-booked': item.booked === true }"
-      *ngFor="let item of N2June; index as i"
+      *ngFor="let item of BookingN2June; index as i"
     >
       {{ item.day }}
     </td>
@@ -35,7 +35,25 @@
     <th>N3</th>
     <td
       [ngClass]="{ 'td-booked': item.booked === true }"
-      *ngFor="let item of N3June; index as i"
+      *ngFor="let item of BookingN3June; index as i"
+    >
+      {{ item.day }}
+    </td>
+  </tr>
+  <tr>
+    <th>N4</th>
+    <td
+      [ngClass]="{ 'td-booked': item.booked === true }"
+      *ngFor="let item of BookingN4June; index as i"
+    >
+      {{ item.day }}
+    </td>
+  </tr>
+  <tr>
+    <th>N5</th>
+    <td
+      [ngClass]="{ 'td-booked': item.booked === true }"
+      *ngFor="let item of BookingN5June; index as i"
     >
       {{ item.day }}
     </td>
