@@ -32,12 +32,25 @@ export class AppComponent implements OnInit {
         day: index,
         month: 'June',
         unit: 'N3',
-        booked: true,
+        booked: false,
       };
       this.N3June.push(N3June);
     }
   }
   onSubmitPeriod() {
     console.log(this.period.value);
+    console.log(this.N2June);
+
+    const key = this.period.value.unit + this.period.value.month;
+    const from = this.period.value.from;
+    const to = this.period.value.to;
+
+    if (key == 'N2June') {
+      this.N2June.map((d) => {
+        if (d.day >= from && d.day <= to) {
+          d.booked = true;
+        }
+      });
+    }
   }
 }
