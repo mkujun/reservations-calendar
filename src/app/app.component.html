@@ -1,1 +1,21 @@
-<div>pero</div>
+<table>
+  <th>Lipanj</th>
+  <tr>
+    <th>N2</th>
+    <td
+      [ngClass]="{ 'td-booked': item.booked === true }"
+      *ngFor="let item of N2June; index as i"
+    >
+      {{ item.day }}
+    </td>
+  </tr>
+  <tr>
+    <th>N3</th>
+    <td
+      [ngClass]="{ 'td-booked': item.booked === true }"
+      *ngFor="let item of N3June; index as i"
+    >
+      {{ item.day }}
+    </td>
+  </tr>
+</table>
