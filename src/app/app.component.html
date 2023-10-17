@@ -1,3 +1,25 @@
+<div>
+  <form [formGroup]="period">
+    <label for="from">From: </label>
+    <input class="input" id="from" type="text" formControlName="from" />
+
+    <label for="to">To: </label>
+    <input class="input" id="to" type="text" formControlName="to" />
+
+    <label for="month">Month: </label>
+    <select class="month" name="month" id="month" formControlName="month">
+      <option value="June">June</option>
+      <option value="July">July</option>
+    </select>
+
+    <label for="unit">Unit: </label>
+    <select name="unit" id="unit" formControlName="unit">
+      <option value="N2">N2</option>
+      <option value="N3">N3</option>
+    </select>
+  </form>
+  <button class="add" type="button" (click)="onSubmitPeriod()">Dodaj</button>
+</div>
 <table>
   <th>Lipanj</th>
   <tr>
