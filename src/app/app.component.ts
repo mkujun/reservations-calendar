@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Booking } from './booking.model';
+import { BookingJune } from 'src/mocks/booking-june';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,7 @@ import { Booking } from './booking.model';
 export class AppComponent implements OnInit {
   title = 'reservations-calendar';
 
-  BookingN2June: Booking[] = [];
-  BookingN3June: Booking[] = [];
-  BookingN4June: Booking[] = [];
-  BookingN5June: Booking[] = [];
+  bookingJune: BookingJune = new BookingJune();
 
   period = new FormGroup({
     from: new FormControl(''),
@@ -22,22 +19,10 @@ export class AppComponent implements OnInit {
     month: new FormControl(''),
   });
 
-  constructor() {
-    for (let index = 1; index <= 30; index++) {
-      const bookingN2June = new Booking(index, 'June', 'N2', false);
-      this.BookingN2June.push(bookingN2June);
-      const bookingN3June = new Booking(index, 'June', 'N3', false);
-      this.BookingN3June.push(bookingN3June);
-      const bookingN4June = new Booking(index, 'June', 'N4', false);
-      this.BookingN4June.push(bookingN4June);
-      const bookingN5June = new Booking(index, 'June', 'N5', false);
-      this.BookingN5June.push(bookingN5June);
-    }
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    console.log(this.BookingN2June);
-    console.log(this.BookingN3June);
+    console.log(this.bookingJune);
   }
 
   onSubmitPeriod() {
@@ -45,8 +30,9 @@ export class AppComponent implements OnInit {
     const from = this.period.value.from;
     const to = this.period.value.to;
 
+    // TODO: add for other units
     if (key == 'N2June') {
-      this.BookingN2June.map((d) => {
+      this.bookingJune.N2.map((d) => {
         if (d.day >= from && d.day <= to) {
           d.booked = true;
         }
