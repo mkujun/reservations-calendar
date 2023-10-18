@@ -24,38 +24,31 @@
   <th>June</th>
   <tr>
     <th>N2</th>
-    <td
-      [ngClass]="{ 'td-booked': item.booked === true }"
-      *ngFor="let item of bookingJune.N2; index as i"
-    >
+    <!-- TODO: uncomment this line when ready...
+    <td [ngClass]="{ 'td-booked': item.booked === true }" *ngFor="let item of bookingJune.N2; index as i">
       {{ item.day }}
+    </td>
+    -->
+    <td class="split3" *ngFor="let item of bookingJune.N2; index as i">
+      {{item.day}}
     </td>
   </tr>
   <tr>
     <th>N3</th>
-    <td
-      [ngClass]="{ 'td-booked': item.booked === true }"
-      *ngFor="let item of bookingJune.N3; index as i"
-    >
+    <td [ngClass]="{ 'td-booked': item.booked === true }" *ngFor="let item of bookingJune.N3; index as i">
       {{ item.day }}
     </td>
   </tr>
 
   <tr>
     <th>N4</th>
-    <td
-      [ngClass]="{ 'td-booked': item.booked === true }"
-      *ngFor="let item of bookingJune.N4; index as i"
-    >
+    <td [ngClass]="{ 'td-booked': item.booked === true }" *ngFor="let item of bookingJune.N4; index as i">
       {{ item.day }}
     </td>
   </tr>
   <tr>
     <th>N5</th>
-    <td
-      [ngClass]="{ 'td-booked': item.booked === true }"
-      *ngFor="let item of bookingJune.N5; index as i"
-    >
+    <td [ngClass]="{ 'td-booked': item.booked === true }" *ngFor="let item of bookingJune.N5; index as i">
       {{ item.day }}
     </td>
   </tr>

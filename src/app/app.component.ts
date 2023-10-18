@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     month: new FormControl(''),
   });
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     console.log(this.bookingJune);
@@ -38,6 +38,12 @@ export class AppComponent implements OnInit {
         }
       });
     } else if (key == 'N3June') {
+      this.bookingJune.N3.map((d) => {
+        if (d.day >= from && d.day <= to) {
+          d.booked = true;
+        }
+      });
+
     }
   }
 }
