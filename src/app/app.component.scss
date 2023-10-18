@@ -5,6 +5,9 @@ th {
 
 table {
   padding: 10px;
+  display: block; // only table is scrollable
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 td {
