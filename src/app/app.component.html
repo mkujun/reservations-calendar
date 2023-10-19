@@ -24,14 +24,25 @@
   <th>June</th>
   <tr>
     <th>N2</th>
-    <!-- TODO: uncomment this line when ready...
-    <td [ngClass]="{ 'td-booked': item.booked === true }" *ngFor="let item of bookingJune.N2; index as i">
-      {{ item.day }}
-    </td>
-    -->
-    <td class="split3" *ngFor="let item of bookingJune.N2; index as i">
-      {{item.day}}
-    </td>
+    <ng-container *ngFor="let item of bookingJune.N2; index as i">
+      <td *ngIf="!item.booked; else elseBlock">
+        {{item.day}}
+      </td>
+      <ng-template #elseBlock>
+        <td class='td-first-day' *ngIf="item.booked && item.isFirstDay && !item.isLastDay">
+          {{item.day}}
+        </td>
+        <td class='td-booked' *ngIf="item.booked && !item.isFirstDay && !item.isLastDay">
+          {{item.day}}
+        </td>
+        <td class='td-first-last-day' *ngIf="item.booked && item.isFirstDay && item.isLastDay">
+          {{item.day}}
+        </td>
+        <td class='td-last-day' *ngIf="item.booked && !item.isFirstDay && item.isLastDay">
+          {{item.day}}
+        </td>
+      </ng-template>
+    </ng-container>
   </tr>
   <tr>
     <th>N3</th>
