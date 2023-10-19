@@ -16,6 +16,8 @@
     <select name="unit" id="unit" formControlName="unit">
       <option value="N2">N2</option>
       <option value="N3">N3</option>
+      <option value="N4">N4</option>
+      <option value="N5">N5</option>
     </select>
   </form>
   <button class="add" type="button" (click)="onSubmitPeriod()">Add</button>
@@ -44,6 +46,9 @@
       </ng-template>
     </ng-container>
   </tr>
+  <!--TODO: make child component for every other unit-->
+
+  <!--
   <tr>
     <th>N3</th>
     <td [ngClass]="{ 'td-booked': item.booked === true }" *ngFor="let item of bookingJune.N3; index as i">
@@ -63,4 +68,5 @@
       {{ item.day }}
     </td>
   </tr>
+  -->
 </table>
