@@ -14,13 +14,13 @@ export class BookingJune {
     this.N5 = [];
 
     for (let index = 1; index <= this.numberOfDays; index++) {
-      const N2 = new Booking(index, 'June', 'N2', false);
+      const N2 = new Booking(index, 'June', 'N2', false, false, false);
       this.N2.push(N2);
-      const N3 = new Booking(index, 'June', 'N3', false);
+      const N3 = new Booking(index, 'June', 'N3', false, false, false);
       this.N3.push(N3);
-      const N4 = new Booking(index, 'June', 'N4', false);
+      const N4 = new Booking(index, 'June', 'N4', false, false, false);
       this.N4.push(N4);
-      const N5 = new Booking(index, 'June', 'N5', false);
+      const N5 = new Booking(index, 'June', 'N5', false, false, false);
       this.N5.push(N5);
     }
   }

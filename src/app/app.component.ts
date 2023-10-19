@@ -35,6 +35,8 @@ export class AppComponent implements OnInit {
       this.bookingJune.N2.map((d) => {
         if (d.day >= from && d.day <= to) {
           d.booked = true;
+          d.isFirstDay = d.day == from ? true : false;
+          d.isLastDay = d.day == to ? true : false;
         }
       });
     } else if (key == 'N3June') {
@@ -45,5 +47,7 @@ export class AppComponent implements OnInit {
       });
 
     }
+    console.log(this.bookingJune);
   }
+
 }
