@@ -1,0 +1,19 @@
+<ng-container *ngFor="let item of bookings; index as i">
+  <td *ngIf="!item.booked; else elseBlock">
+    {{item.day}}
+  </td>
+  <ng-template #elseBlock>
+    <td class='td-first-day' *ngIf="item.booked && item.isFirstDay && !item.isLastDay">
+      {{item.day}}
+    </td>
+    <td class='td-booked' *ngIf="item.booked && !item.isFirstDay && !item.isLastDay">
+      {{item.day}}
+    </td>
+    <td class='td-first-last-day' *ngIf="item.booked && item.isFirstDay && item.isLastDay">
+      {{item.day}}
+    </td>
+    <td class='td-last-day' *ngIf="item.booked && !item.isFirstDay && item.isLastDay">
+      {{item.day}}
+    </td>
+  </ng-template>
+</ng-container>

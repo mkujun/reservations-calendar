@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
     month: new FormControl(''),
   });
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     console.log(this.bookingJune);

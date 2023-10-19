@@ -26,47 +26,19 @@
   <th>June</th>
   <tr>
     <th>N2</th>
-    <ng-container *ngFor="let item of bookingJune.N2; index as i">
-      <td *ngIf="!item.booked; else elseBlock">
-        {{item.day}}
-      </td>
-      <ng-template #elseBlock>
-        <td class='td-first-day' *ngIf="item.booked && item.isFirstDay && !item.isLastDay">
-          {{item.day}}
-        </td>
-        <td class='td-booked' *ngIf="item.booked && !item.isFirstDay && !item.isLastDay">
-          {{item.day}}
-        </td>
-        <td class='td-first-last-day' *ngIf="item.booked && item.isFirstDay && item.isLastDay">
-          {{item.day}}
-        </td>
-        <td class='td-last-day' *ngIf="item.booked && !item.isFirstDay && item.isLastDay">
-          {{item.day}}
-        </td>
-      </ng-template>
-    </ng-container>
+    <app-unit-month [bookings]="bookingJune.N2"></app-unit-month>
   </tr>
-  <!--TODO: make child component for every other unit-->
-
-  <!--
   <tr>
     <th>N3</th>
-    <td [ngClass]="{ 'td-booked': item.booked === true }" *ngFor="let item of bookingJune.N3; index as i">
-      {{ item.day }}
-    </td>
+    <app-unit-month [bookings]="bookingJune.N3"></app-unit-month>
   </tr>
-
   <tr>
     <th>N4</th>
-    <td [ngClass]="{ 'td-booked': item.booked === true }" *ngFor="let item of bookingJune.N4; index as i">
-      {{ item.day }}
-    </td>
+    <app-unit-month [bookings]="bookingJune.N4"></app-unit-month>
   </tr>
   <tr>
     <th>N5</th>
-    <td [ngClass]="{ 'td-booked': item.booked === true }" *ngFor="let item of bookingJune.N5; index as i">
-      {{ item.day }}
-    </td>
+    <app-unit-month [bookings]="bookingJune.N5"></app-unit-month>
   </tr>
-  -->
+
 </table>

@@ -3,9 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UnitMonthComponent } from './unit-month/unit-month.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UnitMonthComponent],
   imports: [BrowserModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
