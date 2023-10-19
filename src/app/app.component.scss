@@ -11,7 +11,7 @@ table {
 }
 
 td {
-  width: 20px;
+  min-width: 20px; // this makes all the cells same width
   border: 1px solid black;
   text-align: center;
   padding: 10px;
