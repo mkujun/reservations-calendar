@@ -24,21 +24,8 @@
 </div>
 <table>
   <th>June</th>
-  <tr>
-    <th>N2</th>
-    <app-unit-month [bookings]="bookingJune.N2"></app-unit-month>
-  </tr>
-  <tr>
-    <th>N3</th>
-    <app-unit-month [bookings]="bookingJune.N3"></app-unit-month>
-  </tr>
-  <tr>
-    <th>N4</th>
-    <app-unit-month [bookings]="bookingJune.N4"></app-unit-month>
-  </tr>
-  <tr>
-    <th>N5</th>
-    <app-unit-month [bookings]="bookingJune.N5"></app-unit-month>
-  </tr>
-
+  <tr app-unit-month unitName="N2" [bookings]="bookingJune.N2"></tr>
+  <tr app-unit-month unitName="N3" [bookings]="bookingJune.N3"></tr>
+  <tr app-unit-month unitName="N4" [bookings]="bookingJune.N4"></tr>
+  <tr app-unit-month unitName="N5" [bookings]="bookingJune.N5"></tr>
 </table>

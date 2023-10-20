@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Booking } from '../booking.model';
 
 @Component({
-  selector: 'app-unit-month',
+  selector: '[app-unit-month]',
   templateUrl: './unit-month.component.html',
   styleUrls: ['./unit-month.component.scss']
 })
@@ -16,4 +16,5 @@ export class UnitMonthComponent implements OnInit {
   }
 
   @Input() bookings: Booking[] = [];
+  @Input() unitName: string = '';
 }
