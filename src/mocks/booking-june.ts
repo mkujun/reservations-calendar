@@ -51,10 +51,17 @@ export class BookingJune {
   }
 
   getBookingByUnit(unitName: string) {
-    if (unitName == 'N2') {
-      return this.N2;
-    } else {
-      return null;
+    switch (unitName) {
+      case 'N2':
+        return this.N2;
+      case 'N3':
+        return this.N3;
+      case 'N4':
+        return this.N4;
+      case 'N5':
+        return this.N5;
+      default:
+        return;
     }
   }
 
