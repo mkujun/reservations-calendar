@@ -49,4 +49,25 @@ export class BookingJune {
     let period: Booking[] = this.N5.slice(Number(from) - 1, Number(to));
     return period.some(this.isFirstOrLastDay);
   }
+
+  getBookingByUnit(unitName: string) {
+    if (unitName == 'N2') {
+      return this.N2;
+    } else {
+      return null;
+    }
+  }
+
+  deleteBooking(from: number, to: number, unitName: string) {
+    const unit = this.getBookingByUnit(unitName);
+    unit?.map((d: Booking) => {
+      if (d.day >= from && d.day <= to) {
+        d.booked = false;
+        d.isFirstDay = false;
+        d.isLastDay = false;
+      }
+    });
+  }
+
+  // TODO: modifiy booking function
 }

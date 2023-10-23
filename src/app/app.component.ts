@@ -48,8 +48,19 @@ export class AppComponent implements OnInit {
     }
   }
 
-  bookedAlert():void {
-    alert("booked");
+  deleteBooking() {
+    const from = this.period.value.from;
+    const to = this.period.value.to;
+    const unit = this.period.value.unit;
+
+   this.bookingJune.deleteBooking(from, to, unit);
+  }
+
+  // TODO: this can move 'from' and 'to' period in existing booking period
+  modifyBooking() {}
+
+  bookedAlert(): void {
+    alert('booked');
   }
 
   onSubmitPeriod() {
