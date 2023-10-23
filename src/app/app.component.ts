@@ -20,8 +20,7 @@ export class AppComponent implements OnInit {
     month: new FormControl(''),
   });
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     console.log(this.bookingJune);
@@ -49,27 +48,47 @@ export class AppComponent implements OnInit {
     }
   }
 
+  bookedAlert():void {
+    alert("booked");
+  }
+
   onSubmitPeriod() {
     const key = this.period.value.unit + this.period.value.month;
     const from = this.period.value.from;
     const to = this.period.value.to;
 
     if (key == 'N2June') {
-      this.bookingJune.N2.map((d) => {
-        this.createBooking(from, to, d);
-      });
+      if (this.bookingJune.isN2Booked(from, to)) {
+        this.bookedAlert();
+      } else {
+        this.bookingJune.N2.map((d) => {
+          this.createBooking(from, to, d);
+        });
+      }
     } else if (key == 'N3June') {
-      this.bookingJune.N3.map((d) => {
-        this.createBooking(from, to, d);
-      });
+      if (this.bookingJune.isN3Booked(from, to)) {
+        this.bookedAlert();
+      } else {
+        this.bookingJune.N3.map((d) => {
+          this.createBooking(from, to, d);
+        });
+      }
     } else if (key == 'N4June') {
-      this.bookingJune.N4.map((d) => {
-        this.createBooking(from, to, d);
-      });
+      if (this.bookingJune.isN4Booked(from, to)) {
+        this.bookedAlert();
+      } else {
+        this.bookingJune.N4.map((d) => {
+          this.createBooking(from, to, d);
+        });
+      }
     } else if (key == 'N5June') {
-      this.bookingJune.N5.map((d) => {
-        this.createBooking(from, to, d);
-      });
+      if (this.bookingJune.isN5Booked(from, to)) {
+        this.bookedAlert();
+      } else {
+        this.bookingJune.N5.map((d) => {
+          this.createBooking(from, to, d);
+        });
+      }
     }
 
     console.log(this.bookingJune);

@@ -24,4 +24,29 @@ export class BookingJune {
       this.N5.push(N5);
     }
   }
+
+  // day can be booked, but only if its not first nor last day
+  isFirstOrLastDay(element: Booking): boolean {
+    return element.booked && !element.isLastDay && !element.isFirstDay;
+  }
+
+  isN2Booked(from: number, to: number): boolean {
+    let period: Booking[] = this.N2.slice(Number(from) - 1, Number(to));
+    return period.some(this.isFirstOrLastDay);
+  }
+
+  isN3Booked(from: number, to: number): boolean {
+    let period: Booking[] = this.N3.slice(Number(from) - 1, Number(to));
+    return period.some(this.isFirstOrLastDay);
+  }
+
+  isN4Booked(from: number, to: number): boolean {
+    let period: Booking[] = this.N4.slice(Number(from) - 1, Number(to));
+    return period.some(this.isFirstOrLastDay);
+  }
+
+  isN5Booked(from: number, to: number): boolean {
+    let period: Booking[] = this.N5.slice(Number(from) - 1, Number(to));
+    return period.some(this.isFirstOrLastDay);
+  }
 }
