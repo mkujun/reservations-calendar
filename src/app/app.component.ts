@@ -53,7 +53,11 @@ export class AppComponent implements OnInit {
     const to = this.period.value.to;
     const unit = this.period.value.unit;
 
-   this.bookingJune.deleteBooking(from, to, unit);
+    let res: string | null = prompt("Are you sure you want to delete booking? (yes/no)");
+
+    if (res === 'yes') {
+      this.bookingJune.deleteBooking(from, to, unit);
+    }
   }
 
   // TODO: this can move 'from' and 'to' period in existing booking period
