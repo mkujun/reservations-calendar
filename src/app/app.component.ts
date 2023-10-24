@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   deleteBooking() {
-   const {from, to, unit, month} = this.period.value;
+    const { from, to, unit, month } = this.period.value;
 
     let res: string | null = prompt(
       'Are you sure you want to delete booking? (yes/no)'
@@ -45,33 +45,11 @@ export class AppComponent implements OnInit {
   }
 
   onSubmitPeriod() {
-   const {from, to, unit, month} = this.period.value;
+    const { from, to, unit, month } = this.period.value;
 
-    if (unit == 'N2') {
-      if (this.bookings.isN2Booked(from, to, month)) {
-        this.bookedAlert();
-      } else {
-        this.bookings.createBooking(from, to, month, unit);
-      }
-    } else if (unit == 'N3') {
-      if (this.bookings.isN3Booked(from, to, month)) {
-        this.bookedAlert();
-      } else {
-        this.bookings.createBooking(from, to, month, unit);
-      }
-    } else if (unit == 'N4') {
-      if (this.bookings.isN4Booked(from, to, month)) {
-        this.bookedAlert();
-      } else {
-        this.bookings.createBooking(from, to, month, unit);
-      }
-    } else if (unit == 'N5') {
-      if (this.bookings.isN5Booked(from, to, month)) {
-        this.bookedAlert();
-      } else {
-        this.bookings.createBooking(from, to, month, unit);
-      }
-    }
+    this.bookings.isUnitBooked(from, to, month, unit)
+      ? this.bookedAlert()
+      : this.bookings.createBooking(from, to, month, unit);
 
     console.log(this.bookings.bookingJune);
   }

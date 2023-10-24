@@ -25,8 +25,7 @@ export class Bookings {
         default:
           return [];
       }
-    }
-    else if (month == 'July') {
+    } else if (month == 'July') {
       switch (unitName) {
         case 'N2':
           return this.bookingJuly.N2;
@@ -39,9 +38,7 @@ export class Bookings {
         default:
           return [];
       }
-
-    }
-    else return [];
+    } else return [];
   }
 
   private markBooked(from: number, to: number, d: Booking) {
@@ -70,133 +67,62 @@ export class Bookings {
     const unit = this.getBookingByUnit(unitName, month);
     unit?.map((d: Booking) => {
       this.markBooked(from, to, d);
-    })
+    });
   }
 
   deleteBooking(from: number, to: number, unitName: string, month: string) {
     const unit = this.getBookingByUnit(unitName, month);
-      unit?.map((d: Booking) => {
-        // days in between
-        if (d.day > from && d.day < to) {
-          d.booked = false;
+    unit?.map((d: Booking) => {
+      // days in between
+      if (d.day > from && d.day < to) {
+        d.booked = false;
+        d.isFirstDay = false;
+        d.isLastDay = false;
+      }
+
+      if (d.day == from) {
+        // edge case
+        if (d.isFirstDay && !d.isLastDay) {
           d.isFirstDay = false;
+          d.booked = false;
+        }
+        if (d.isFirstDay && d.isLastDay) {
+          d.isFirstDay = false;
+          d.booked = true;
+        }
+      }
+
+      if (d.day == to) {
+        // edge case
+        if (d.isLastDay && !d.isFirstDay) {
           d.isLastDay = false;
+          d.booked = false;
         }
+        if (d.isLastDay && d.isFirstDay) {
+          d.isLastDay = false;
+          d.booked = true;
+        }
+      }
+    });
+  }
 
-        if (d.day == from) {
-          // edge case
-          if (d.isFirstDay && !d.isLastDay) {
-            d.isFirstDay = false;
-            d.booked = false;
-          }
-          if (d.isFirstDay && d.isLastDay) {
-            d.isFirstDay = false;
-            d.booked = true;
-          }
-        }
-
-        if (d.day == to) {
-          // edge case
-          if (d.isLastDay && !d.isFirstDay) {
-            d.isLastDay = false;
-            d.booked = false;
-          }
-          if (d.isLastDay && d.isFirstDay) {
-            d.isLastDay = false;
-            d.booked = true;
-          }
-        }
-      });
+  private isOneNight(element: Booking): boolean {
+    return element.booked;
   }
 
   private isFirstOrLastDay(element: Booking): boolean {
     return element.booked && !element.isLastDay && !element.isFirstDay;
   }
 
-  // TODO: 4 methods below should be one method
-  isN2Booked(from: number, to: number, month: string): boolean {
-    if (month == 'June') {
-      let period: Booking[] = this.bookingJune.N2.slice(
-        Number(from) - 1,
-        Number(to)
-      );
-      return period.some(this.isFirstOrLastDay);
-    }
-    else if (month == 'July') {
-      let period: Booking[] = this.bookingJuly.N2.slice(
-        Number(from) - 1,
-        Number(to)
-      );
-      return period.some(this.isFirstOrLastDay);
+  isUnitBooked(from: number, to: number, month: string, unitName: string) {
+    const unit = this.getBookingByUnit(unitName, month);
+    let period: Booking[] = unit.slice(Number(from) - 1, Number(to));
 
+    if(period.length <= 2) {
+      return period.some(this.isOneNight);
     }
     else {
-      return false;
-    }
-  }
-
-  isN3Booked(from: number, to: number, month: string): boolean {
-    if (month == 'June') {
-      let period: Booking[] = this.bookingJune.N3.slice(
-        Number(from) - 1,
-        Number(to)
-      );
       return period.some(this.isFirstOrLastDay);
-    }
-    else if (month == 'July') {
-      let period: Booking[] = this.bookingJuly.N3.slice(
-        Number(from) - 1,
-        Number(to)
-      );
-      return period.some(this.isFirstOrLastDay);
-
-    }
-    else {
-      return false;
-    }
-  }
-
-  isN4Booked(from: number, to: number, month: string): boolean {
-    if (month == 'June') {
-      let period: Booking[] = this.bookingJune.N4.slice(
-        Number(from) - 1,
-        Number(to)
-      );
-      return period.some(this.isFirstOrLastDay);
-    }
-
-    else if (month == 'July') {
-      let period: Booking[] = this.bookingJuly.N4.slice(
-        Number(from) - 1,
-        Number(to)
-      );
-      return period.some(this.isFirstOrLastDay);
-
-    }
-    else {
-      return false;
-    }
-  }
-
-  isN5Booked(from: number, to: number, month: string): boolean {
-    if (month == 'June') {
-      let period: Booking[] = this.bookingJune.N5.slice(
-        Number(from) - 1,
-        Number(to)
-      );
-      return period.some(this.isFirstOrLastDay);
-    }
-
-    else if (month == 'July') {
-      let period: Booking[] = this.bookingJuly.N5.slice(
-        Number(from) - 1,
-        Number(to)
-      );
-      return period.some(this.isFirstOrLastDay);
-
-    }
-    else {
-      return false;
     }
   }
 }
