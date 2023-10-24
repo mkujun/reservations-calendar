@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { BookingJune } from 'src/mocks/booking-june';
-import { Booking } from 'src/app/booking.model';
+import { Bookings } from 'src/mocks/bookings';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +10,7 @@ import { Booking } from 'src/app/booking.model';
 export class AppComponent implements OnInit {
   title = 'reservations-calendar';
 
-  bookingJune: BookingJune = new BookingJune();
+  bookings: Bookings = new Bookings();
 
   period = new FormGroup({
     from: new FormControl(''),
@@ -23,40 +22,21 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.bookingJune);
-  }
-
-  createBooking(from: number, to: number, d: Booking) {
-    if (d.day >= from && d.day <= to) {
-      d.booked = true;
-      if (d.day == from) {
-        if (d.isFirstDay == false) {
-          d.isFirstDay = true;
-        } else {
-          // if it is first, now it is also the last
-          d.isLastDay = true;
-        }
-      }
-      if (d.day == to) {
-        if (d.isLastDay == false) {
-          d.isLastDay = true;
-        } else {
-          // if it is last, now it is also the first
-          d.isFirstDay = true;
-        }
-      }
-    }
+    console.log(this.bookings.bookingJune);
   }
 
   deleteBooking() {
     const from = this.period.value.from;
     const to = this.period.value.to;
     const unit = this.period.value.unit;
+    const month = this.period.value.month;
 
-    let res: string | null = prompt("Are you sure you want to delete booking? (yes/no)");
+    let res: string | null = prompt(
+      'Are you sure you want to delete booking? (yes/no)'
+    );
 
     if (res === 'yes') {
-      this.bookingJune.deleteBooking(from, to, unit);
+      this.bookings.deleteBooking(from, to, unit, month);
     }
   }
 
@@ -68,44 +48,37 @@ export class AppComponent implements OnInit {
   }
 
   onSubmitPeriod() {
-    const key = this.period.value.unit + this.period.value.month;
     const from = this.period.value.from;
     const to = this.period.value.to;
+    const month = this.period.value.month;
+    const unit = this.period.value.unit;
 
-    if (key == 'N2June') {
-      if (this.bookingJune.isN2Booked(from, to)) {
+    if (unit == 'N2') {
+      if (this.bookings.isN2Booked(from, to, month)) {
         this.bookedAlert();
       } else {
-        this.bookingJune.N2.map((d) => {
-          this.createBooking(from, to, d);
-        });
+        this.bookings.createBooking(from, to, month, unit);
       }
-    } else if (key == 'N3June') {
-      if (this.bookingJune.isN3Booked(from, to)) {
+    } else if (unit == 'N3') {
+      if (this.bookings.isN3Booked(from, to, month)) {
         this.bookedAlert();
       } else {
-        this.bookingJune.N3.map((d) => {
-          this.createBooking(from, to, d);
-        });
+        this.bookings.createBooking(from, to, month, unit);
       }
-    } else if (key == 'N4June') {
-      if (this.bookingJune.isN4Booked(from, to)) {
+    } else if (unit == 'N4') {
+      if (this.bookings.isN4Booked(from, to, month)) {
         this.bookedAlert();
       } else {
-        this.bookingJune.N4.map((d) => {
-          this.createBooking(from, to, d);
-        });
+        this.bookings.createBooking(from, to, month, unit);
       }
-    } else if (key == 'N5June') {
-      if (this.bookingJune.isN5Booked(from, to)) {
+    } else if (unit == 'N5') {
+      if (this.bookings.isN5Booked(from, to, month)) {
         this.bookedAlert();
       } else {
-        this.bookingJune.N5.map((d) => {
-          this.createBooking(from, to, d);
-        });
+        this.bookings.createBooking(from, to, month, unit);
       }
     }
 
-    console.log(this.bookingJune);
+    console.log(this.bookings.bookingJune);
   }
 }
