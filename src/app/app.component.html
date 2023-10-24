@@ -11,6 +11,7 @@
       <option value="June">June</option>
       <option value="July">July</option>
       <option value="August">August</option>
+      <option value="September">September</option>
     </select>
 
     <label for="unit">Unit: </label>
@@ -44,4 +45,11 @@
   <tr app-unit-month unitName="N3" [bookings]="bookings.bookingAugust.N3"></tr>
   <tr app-unit-month unitName="N4" [bookings]="bookings.bookingAugust.N4"></tr>
   <tr app-unit-month unitName="N5" [bookings]="bookings.bookingAugust.N5"></tr>
+</table>
+<table>
+  <th>September</th>
+  <tr app-unit-month unitName="N2" [bookings]="bookings.bookingSeptember.N2"></tr>
+  <tr app-unit-month unitName="N3" [bookings]="bookings.bookingSeptember.N3"></tr>
+  <tr app-unit-month unitName="N4" [bookings]="bookings.bookingSeptember.N4"></tr>
+  <tr app-unit-month unitName="N5" [bookings]="bookings.bookingSeptember.N5"></tr>
 </table>
