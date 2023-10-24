@@ -1,6 +1,6 @@
 import { Booking } from 'src/app/booking.model';
 
-export class BookingJuly {
+export class BookingAugust {
   N2: Booking[];
   N3: Booking[];
   N4: Booking[];
@@ -14,13 +14,13 @@ export class BookingJuly {
     this.N5 = [];
 
     for (let index = 1; index <= this.numberOfDays; index++) {
-      const N2 = new Booking(index, 'July', 'N2', false, false, false);
+      const N2 = new Booking(index, 'August', 'N2', false, false, false);
       this.N2.push(N2);
-      const N3 = new Booking(index, 'July', 'N3', false, false, false);
+      const N3 = new Booking(index, 'August', 'N3', false, false, false);
       this.N3.push(N3);
-      const N4 = new Booking(index, 'July', 'N4', false, false, false);
+      const N4 = new Booking(index, 'August', 'N4', false, false, false);
       this.N4.push(N4);
-      const N5 = new Booking(index, 'July', 'N5', false, false, false);
+      const N5 = new Booking(index, 'August', 'N5', false, false, false);
       this.N5.push(N5);
     }
   }

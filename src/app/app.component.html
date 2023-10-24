@@ -10,6 +10,7 @@
     <select class="month" name="month" id="month" formControlName="month">
       <option value="June">June</option>
       <option value="July">July</option>
+      <option value="August">August</option>
     </select>
 
     <label for="unit">Unit: </label>
@@ -36,4 +37,11 @@
   <tr app-unit-month unitName="N3" [bookings]="bookings.bookingJuly.N3"></tr>
   <tr app-unit-month unitName="N4" [bookings]="bookings.bookingJuly.N4"></tr>
   <tr app-unit-month unitName="N5" [bookings]="bookings.bookingJuly.N5"></tr>
+</table>
+<table>
+  <th>August</th>
+  <tr app-unit-month unitName="N2" [bookings]="bookings.bookingAugust.N2"></tr>
+  <tr app-unit-month unitName="N3" [bookings]="bookings.bookingAugust.N3"></tr>
+  <tr app-unit-month unitName="N4" [bookings]="bookings.bookingAugust.N4"></tr>
+  <tr app-unit-month unitName="N5" [bookings]="bookings.bookingAugust.N5"></tr>
 </table>

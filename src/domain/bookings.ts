@@ -1,14 +1,17 @@
 import { BookingJune } from './booking-june';
 import { BookingJuly } from './booking-july';
+import { BookingAugust } from './booking-august';
 import { Booking } from '../app/booking.model';
 
 export class Bookings {
   bookingJune: BookingJune;
   bookingJuly: BookingJuly;
+  bookingAugust: BookingAugust;
 
   constructor() {
     this.bookingJune = new BookingJune();
     this.bookingJuly = new BookingJuly();
+    this.bookingAugust = new BookingAugust();
   }
 
   private getBookingByUnit(unitName: string, month: string): Booking[] {
@@ -38,7 +41,23 @@ export class Bookings {
         default:
           return [];
       }
-    } else return [];
+    }  else if (month == 'August') {
+      switch (unitName) {
+        case 'N2':
+          return this.bookingAugust.N2;
+        case 'N3':
+          return this.bookingAugust.N3;
+        case 'N4':
+          return this.bookingAugust.N4;
+        case 'N5':
+          return this.bookingAugust.N5;
+        default:
+          return [];
+      }
+    }
+
+    else return [];
+
   }
 
   private markBooked(from: number, to: number, d: Booking) {
