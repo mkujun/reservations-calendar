@@ -71,12 +71,38 @@ export class Bookings {
 
   deleteBooking(from: number, to: number, unitName: string, month: string) {
     const unit = this.getBookingByUnit(unitName, month);
+
     if (month == 'June') {
       unit?.map((d: Booking) => {
-        if (d.day >= from && d.day <= to) {
+        // days in between
+        if (d.day > from && d.day < to) {
           d.booked = false;
           d.isFirstDay = false;
           d.isLastDay = false;
+        }
+
+        if (d.day == from) {
+          // edge case
+          if (d.isFirstDay && !d.isLastDay) {
+            d.isFirstDay = false;
+            d.booked = false;
+          }
+          if (d.isFirstDay && d.isLastDay) {
+            d.isFirstDay = false;
+            d.booked = true;
+          }
+        }
+
+        if (d.day == to) {
+          // edge case
+          if (d.isLastDay && !d.isFirstDay) {
+            d.isLastDay = false;
+            d.booked = false;
+          }
+          if (d.isLastDay && d.isFirstDay) {
+            d.isLastDay = false;
+            d.booked = true;
+          }
         }
       });
     }

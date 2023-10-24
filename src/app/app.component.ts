@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Bookings } from 'src/mocks/bookings';
+import { Bookings } from 'src/domain/bookings';
 
 @Component({
   selector: 'app-root',
@@ -26,10 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   deleteBooking() {
-    const from = this.period.value.from;
-    const to = this.period.value.to;
-    const unit = this.period.value.unit;
-    const month = this.period.value.month;
+   const {from, to, unit, month} = this.period.value;
 
     let res: string | null = prompt(
       'Are you sure you want to delete booking? (yes/no)'
@@ -48,10 +45,7 @@ export class AppComponent implements OnInit {
   }
 
   onSubmitPeriod() {
-    const from = this.period.value.from;
-    const to = this.period.value.to;
-    const month = this.period.value.month;
-    const unit = this.period.value.unit;
+   const {from, to, unit, month} = this.period.value;
 
     if (unit == 'N2') {
       if (this.bookings.isN2Booked(from, to, month)) {
