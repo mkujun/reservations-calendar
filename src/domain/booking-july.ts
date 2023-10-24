@@ -1,11 +1,11 @@
 import { Booking } from 'src/app/booking.model';
 
-export class BookingJune {
+export class BookingJuly {
   N2: Booking[];
   N3: Booking[];
   N4: Booking[];
   N5: Booking[];
-  numberOfDays: number = 30;
+  numberOfDays: number = 31;
 
   constructor() {
     this.N2 = [];

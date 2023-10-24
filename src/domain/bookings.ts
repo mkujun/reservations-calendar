@@ -1,14 +1,17 @@
 import { BookingJune } from './booking-june';
+import { BookingJuly } from './booking-july';
 import { Booking } from '../app/booking.model';
 
 export class Bookings {
   bookingJune: BookingJune;
+  bookingJuly: BookingJuly;
 
   constructor() {
     this.bookingJune = new BookingJune();
+    this.bookingJuly = new BookingJuly();
   }
 
-  private getBookingByUnit(unitName: string, month: string) {
+  private getBookingByUnit(unitName: string, month: string): Booking[] {
     if (month == 'June') {
       switch (unitName) {
         case 'N2':
@@ -20,9 +23,25 @@ export class Bookings {
         case 'N5':
           return this.bookingJune.N5;
         default:
-          return;
+          return [];
       }
-    } else return null;
+    }
+    else if (month == 'July') {
+      switch (unitName) {
+        case 'N2':
+          return this.bookingJuly.N2;
+        case 'N3':
+          return this.bookingJuly.N3;
+        case 'N4':
+          return this.bookingJuly.N4;
+        case 'N5':
+          return this.bookingJuly.N5;
+        default:
+          return [];
+      }
+
+    }
+    else return [];
   }
 
   private markBooked(from: number, to: number, d: Booking) {
@@ -47,32 +66,15 @@ export class Bookings {
     }
   }
 
-  createBooking(from: number, to: number, month: string, unit: string) {
-    if (month == 'June') {
-      if (unit == 'N2') {
-        this.bookingJune.N2.map((d) => {
-          this.markBooked(from, to, d);
-        });
-      } else if (unit == 'N3') {
-        this.bookingJune.N3.map((d) => {
-          this.markBooked(from, to, d);
-        });
-      } else if (unit == 'N4') {
-        this.bookingJune.N4.map((d) => {
-          this.markBooked(from, to, d);
-        });
-      } else if (unit == 'N5') {
-        this.bookingJune.N5.map((d) => {
-          this.markBooked(from, to, d);
-        });
-      }
-    }
+  createBooking(from: number, to: number, month: string, unitName: string) {
+    const unit = this.getBookingByUnit(unitName, month);
+    unit?.map((d: Booking) => {
+      this.markBooked(from, to, d);
+    })
   }
 
   deleteBooking(from: number, to: number, unitName: string, month: string) {
     const unit = this.getBookingByUnit(unitName, month);
-
-    if (month == 'June') {
       unit?.map((d: Booking) => {
         // days in between
         if (d.day > from && d.day < to) {
@@ -105,13 +107,13 @@ export class Bookings {
           }
         }
       });
-    }
   }
 
   private isFirstOrLastDay(element: Booking): boolean {
     return element.booked && !element.isLastDay && !element.isFirstDay;
   }
 
+  // TODO: 4 methods below should be one method
   isN2Booked(from: number, to: number, month: string): boolean {
     if (month == 'June') {
       let period: Booking[] = this.bookingJune.N2.slice(
@@ -119,7 +121,16 @@ export class Bookings {
         Number(to)
       );
       return period.some(this.isFirstOrLastDay);
-    } else {
+    }
+    else if (month == 'July') {
+      let period: Booking[] = this.bookingJuly.N2.slice(
+        Number(from) - 1,
+        Number(to)
+      );
+      return period.some(this.isFirstOrLastDay);
+
+    }
+    else {
       return false;
     }
   }
@@ -131,7 +142,16 @@ export class Bookings {
         Number(to)
       );
       return period.some(this.isFirstOrLastDay);
-    } else {
+    }
+    else if (month == 'July') {
+      let period: Booking[] = this.bookingJuly.N3.slice(
+        Number(from) - 1,
+        Number(to)
+      );
+      return period.some(this.isFirstOrLastDay);
+
+    }
+    else {
       return false;
     }
   }
@@ -143,7 +163,17 @@ export class Bookings {
         Number(to)
       );
       return period.some(this.isFirstOrLastDay);
-    } else {
+    }
+
+    else if (month == 'July') {
+      let period: Booking[] = this.bookingJuly.N4.slice(
+        Number(from) - 1,
+        Number(to)
+      );
+      return period.some(this.isFirstOrLastDay);
+
+    }
+    else {
       return false;
     }
   }
@@ -155,7 +185,17 @@ export class Bookings {
         Number(to)
       );
       return period.some(this.isFirstOrLastDay);
-    } else {
+    }
+
+    else if (month == 'July') {
+      let period: Booking[] = this.bookingJuly.N5.slice(
+        Number(from) - 1,
+        Number(to)
+      );
+      return period.some(this.isFirstOrLastDay);
+
+    }
+    else {
       return false;
     }
   }
