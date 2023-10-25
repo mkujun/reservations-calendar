@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Booking } from '../booking.model';
+import { Booking } from '../../booking.model';
 
 @Component({
   selector: '[app-unit-month]',
