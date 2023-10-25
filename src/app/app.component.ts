@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
     from: new FormControl(''),
     to: new FormControl(''),
     unit: new FormControl(''),
-    month: new FormControl(''),
+    fromMonth: new FormControl(''),
+    toMonth: new FormControl(''),
   });
 
   constructor() {}
@@ -26,14 +27,14 @@ export class AppComponent implements OnInit {
   }
 
   deleteBooking() {
-    const { from, to, unit, month } = this.period.value;
+    const { from, to, unit, fromMonth, toMonth } = this.period.value;
 
     let res: string | null = prompt(
       'Are you sure you want to delete booking? (yes/no)'
     );
 
     if (res === 'yes') {
-      this.bookings.deleteBooking(from, to, unit, month);
+      //this.bookings.deleteBooking(from, to, unit, month);
     }
   }
 
@@ -45,11 +46,11 @@ export class AppComponent implements OnInit {
   }
 
   onSubmitPeriod() {
-    const { from, to, unit, month } = this.period.value;
+    const { from, to, unit, fromMonth, toMonth } = this.period.value;
 
-    this.bookings.isUnitBooked(from, to, month, unit)
+    this.bookings.isUnitBooked(from, to, fromMonth, toMonth, unit)
       ? this.bookedAlert()
-      : this.bookings.createBooking(from, to, month, unit);
+      : this.bookings.createBooking(from, to, fromMonth, toMonth, unit);
 
     console.log(this.bookings.bookingJune);
   }

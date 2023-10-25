@@ -44,7 +44,7 @@ export class Bookings {
         default:
           return [];
       }
-    }  else if (month == 'August') {
+    } else if (month == 'August') {
       switch (unitName) {
         case 'N2':
           return this.bookingAugust.N2;
@@ -70,10 +70,7 @@ export class Bookings {
         default:
           return [];
       }
-    }
-
-    else return [];
-
+    } else return [];
   }
 
   private markBooked(from: number, to: number, d: Booking) {
@@ -98,13 +95,66 @@ export class Bookings {
     }
   }
 
-  createBooking(from: number, to: number, month: string, unitName: string) {
-    const unit = this.getBookingByUnit(unitName, month);
-    unit?.map((d: Booking) => {
-      this.markBooked(from, to, d);
-    });
+  private getLastDayOfMonth(month: string): number {
+    if (month == 'June' || month == 'September') {
+      return 30;
+    } else if (month == 'July' || month == 'August') {
+      return 31;
+    }
+    return 0;
   }
 
+  createBooking(
+    from: number,
+    to: number,
+    fromMonth: string,
+    toMonth: string,
+    unitName: string
+  ) {
+    // if period spans through one month
+    if (fromMonth == toMonth) {
+      const unit = this.getBookingByUnit(unitName, fromMonth);
+      unit?.map((d: Booking) => {
+        this.markBooked(from, to, d);
+      });
+    }
+    // if period spans through two months
+    else {
+      const unitFrom = this.getBookingByUnit(unitName, fromMonth);
+      unitFrom?.map((d: Booking, i: number, unitFrom) => {
+        // last day of month
+        if (i + 1 == this.getLastDayOfMonth(fromMonth)) {
+          // if the last day of the month is first day of the booking period
+          if (i + 1 == from) {
+            d.booked = true;
+            d.isFirstDay = true;
+          } else {
+            d.booked = true;
+            d.isLastDay = false;
+          }
+        } else {
+          this.markBooked(from, this.getLastDayOfMonth(fromMonth), d);
+        }
+      });
+      const unitTo = this.getBookingByUnit(unitName, toMonth);
+      unitTo?.map((d: Booking, i: number, unitTo) => {
+        if (d.day == 1) {
+          // if the first day of the month is the last day in booking period
+          if (d.day == to) {
+            d.booked = true;
+            d.isLastDay = true;
+          } else {
+            d.booked = true;
+            d.isFirstDay = false;
+          }
+        } else {
+          this.markBooked(1, to, d);
+        }
+      });
+    }
+  }
+
+  // TODO: refactor delete according to create
   deleteBooking(from: number, to: number, unitName: string, month: string) {
     const unit = this.getBookingByUnit(unitName, month);
     unit?.map((d: Booking) => {
@@ -149,15 +199,40 @@ export class Bookings {
     return element.booked && !element.isLastDay && !element.isFirstDay;
   }
 
-  isUnitBooked(from: number, to: number, month: string, unitName: string) {
-    const unit = this.getBookingByUnit(unitName, month);
-    let period: Booking[] = unit.slice(Number(from) - 1, Number(to));
+  isUnitBooked(
+    from: number,
+    to: number,
+    fromMonth: string,
+    toMonth: string,
+    unitName: string
+  ): boolean {
+    // if period spans through one month
+    if (fromMonth == toMonth) {
+      const unit = this.getBookingByUnit(unitName, fromMonth);
+      let period: Booking[] = unit.slice(Number(from) - 1, Number(to));
 
-    if(period.length <= 2) {
-      return period.some(this.isOneNight);
+      if (period.length <= 2) {
+        return period.some(this.isOneNight);
+      } else {
+        return period.some(this.isFirstOrLastDay);
+      }
     }
+    // if period spans through two months
     else {
-      return period.some(this.isFirstOrLastDay);
+      const unitFrom = this.getBookingByUnit(unitName, fromMonth);
+      const unitTo = this.getBookingByUnit(unitName, toMonth);
+      const periodFrom: Booking[] = unitFrom.slice(
+        Number(from) - 1,
+        this.getLastDayOfMonth(fromMonth)
+      );
+      const periodTo: Booking[] = unitTo.slice(1, Number(to));
+      const period: Booking[] = periodFrom.concat(periodTo);
+
+      if (period.length <= 2) {
+        return period.some(this.isOneNight);
+      } else {
+        return period.some(this.isFirstOrLastDay);
+      }
     }
   }
 }
