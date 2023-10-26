@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.bookings.bookingJune);
   }
 
   deleteBooking() {
@@ -51,7 +50,5 @@ export class AppComponent implements OnInit {
     this.bookings.isUnitBooked(from, to, fromMonth, toMonth, unit)
       ? this.bookedAlert()
       : this.bookings.createBooking(from, to, fromMonth, toMonth, unit);
-
-    console.log(this.bookings.bookingJune);
   }
 }

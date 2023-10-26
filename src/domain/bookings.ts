@@ -3,12 +3,18 @@ import { BookingJuly } from './booking-july';
 import { BookingAugust } from './booking-august';
 import { BookingSeptember } from './booking-september';
 import { Booking } from '../app/booking.model';
+import { UnitBookings } from './unit-bookings';
 
 export class Bookings {
   bookingJune: BookingJune;
   bookingJuly: BookingJuly;
   bookingAugust: BookingAugust;
   bookingSeptember: BookingSeptember;
+
+  bookingsN2: UnitBookings[] = [];
+  bookingsN3: UnitBookings[] = [];
+  bookingsN4: UnitBookings[] = [];
+  bookingsN5: UnitBookings[] = [];
 
   constructor() {
     this.bookingJune = new BookingJune();
@@ -104,6 +110,29 @@ export class Bookings {
     return 0;
   }
 
+  createUnitBooking(
+    unit: string,
+    from: string,
+    fromMonth: string,
+    to: string,
+    toMonth: string
+  ) {
+    const fromDate: string = from + '.' + fromMonth;
+    const toDate: string = to + '.' + toMonth;
+
+    const unitBookings: UnitBookings = new UnitBookings(unit, fromDate, toDate);
+
+    if (unit == 'N2') {
+      this.bookingsN2.push(unitBookings);
+    } else if (unit == 'N3') {
+      this.bookingsN3.push(unitBookings);
+    } else if (unit == 'N4') {
+      this.bookingsN4.push(unitBookings);
+    } else if (unit == 'N5') {
+      this.bookingsN5.push(unitBookings);
+    }
+  }
+
   createBooking(
     from: number,
     to: number,
@@ -111,6 +140,14 @@ export class Bookings {
     toMonth: string,
     unitName: string
   ) {
+    this.createUnitBooking(
+      unitName,
+      String(from),
+      fromMonth,
+      String(to),
+      toMonth
+    );
+
     // if period spans through one month
     if (fromMonth == toMonth) {
       const unit = this.getBookingByUnit(unitName, fromMonth);

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { UnitBookings } from 'src/domain/unit-bookings';
 
 @Component({
   selector: 'app-bookings-list',
@@ -12,4 +13,8 @@ export class BookingsListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @Input() N2: UnitBookings[] = [];
+  @Input() N3: UnitBookings[] = [];
+  @Input() N4: UnitBookings[] = [];
+  @Input() N5: UnitBookings[] = [];
 }

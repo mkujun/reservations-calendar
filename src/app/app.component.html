@@ -4,7 +4,12 @@
     <input class="input" id="from" type="text" formControlName="from" />
 
     <label for="month">From Month: </label>
-    <select class="month" name="fromMonth" id="fromMonth" formControlName="fromMonth">
+    <select
+      class="month"
+      name="fromMonth"
+      id="fromMonth"
+      formControlName="fromMonth"
+    >
       <option value="June">June</option>
       <option value="July">July</option>
       <option value="August">August</option>
@@ -56,8 +61,30 @@
 </table>
 <table>
   <th>September</th>
-  <tr app-unit-month unitName="N2" [bookings]="bookings.bookingSeptember.N2"></tr>
-  <tr app-unit-month unitName="N3" [bookings]="bookings.bookingSeptember.N3"></tr>
-  <tr app-unit-month unitName="N4" [bookings]="bookings.bookingSeptember.N4"></tr>
-  <tr app-unit-month unitName="N5" [bookings]="bookings.bookingSeptember.N5"></tr>
+  <tr
+    app-unit-month
+    unitName="N2"
+    [bookings]="bookings.bookingSeptember.N2"
+  ></tr>
+  <tr
+    app-unit-month
+    unitName="N3"
+    [bookings]="bookings.bookingSeptember.N3"
+  ></tr>
+  <tr
+    app-unit-month
+    unitName="N4"
+    [bookings]="bookings.bookingSeptember.N4"
+  ></tr>
+  <tr
+    app-unit-month
+    unitName="N5"
+    [bookings]="bookings.bookingSeptember.N5"
+  ></tr>
 </table>
+<app-bookings-list
+  [N2]="bookings.bookingsN2"
+  [N3]="bookings.bookingsN3"
+  [N4]="bookings.bookingsN4"
+  [N5]="bookings.bookingsN5"
+></app-bookings-list>
