@@ -31,11 +31,39 @@ export class AppComponent implements OnInit {
     alert('booked');
   }
 
-  // TODO: check if date from is earlier in time than date to
+  isMonthsValid(): boolean {
+    const { from, to, fromMonth, toMonth } = this.period.value;
+
+    if (fromMonth > toMonth) {
+      return false;
+    } else {
+      if (from > to) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  getMonthName(monthNumber: number): string {
+    if (monthNumber == 6) {
+      return 'June';
+    } else if (monthNumber == 7) {
+      return 'July';
+    } else if (monthNumber == 8) {
+      return 'August';
+    } else if (monthNumber == 9) {
+      return 'September';
+    } else {
+      return '';
+    }
+  }
 
   onSubmitPeriod() {
-    if (this.period.valid) {
-      const { from, to, unit, fromMonth, toMonth } = this.period.value;
+    if (this.period.valid && this.isMonthsValid()) {
+      let { from, to, unit } = this.period.value;
+      let fromMonth = this.getMonthName(this.period.value.fromMonth);
+      let toMonth = this.getMonthName(this.period.value.toMonth);
 
       this.bookings.isUnitBooked(from, to, fromMonth, toMonth, unit)
         ? this.bookedAlert()
