@@ -1,20 +1,23 @@
-<div>N2</div>
+<div class="unit-name">N2</div>
 <div class="row" *ngFor="let item of N2">
-  <div>{{item.unit}} {{item.from}} - {{item.to}}</div>
-  <button type="button" (click)="deleteBooking(item)">Delete</button>
+  <div class="unit-booking">{{item.unit}} {{item.from}} - {{item.to}}</div>
+  <button class="unit-booking-delete" type="button" (click)="deleteBooking(item)">Delete</button>
 </div>
 
-<div>N3</div>
+<div class="unit-name">N3</div>
 <div *ngFor="let item of N3">
-  <p>{{item.unit}} {{item.from}} - {{item.to}}</p>
+  <div class="unit-booking">{{item.unit}} {{item.from}} - {{item.to}}</div>
+  <button class="unit-booking-delete" type="button" (click)="deleteBooking(item)">Delete</button>
 </div>
 
-<div>N4</div>
+<div class="unit-name">N4</div>
 <div *ngFor="let item of N4">
-  <p>{{item.unit}} {{item.from}} - {{item.to}}</p>
+  <div class="unit-booking">{{item.unit}} {{item.from}} - {{item.to}}</div>
+  <button class="unit-booking-delete" type="button" (click)="deleteBooking(item)">Delete</button>
 </div>
 
-<div>N5</div>
+<div class="unit-name">N5</div>
 <div *ngFor="let item of N5">
-  <p>{{item.unit}} {{item.from}} - {{item.to}}</p>
+  <div class="unit-booking">{{item.unit}} {{item.from}} - {{item.to}}</div>
+  <button class="unit-booking-delete" type="button" (click)="deleteBooking(item)">Delete</button>
 </div>
