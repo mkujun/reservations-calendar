@@ -1,39 +1,43 @@
 <div>
   <form [formGroup]="period">
-    <label for="from">From: </label>
-    <input class="input" id="from" type="text" formControlName="from" />
 
-    <label for="month">From Month: </label>
-    <select
-      class="month"
-      name="fromMonth"
-      id="fromMonth"
-      formControlName="fromMonth"
-    >
-      <option value="June">June</option>
-      <option value="July">July</option>
-      <option value="August">August</option>
-      <option value="September">September</option>
-    </select>
+    <div>
+      <label for="from">From: </label>
+    </div>
+    <div>
+      <input class="input" id="from" type="text" formControlName="from" />
+      <select
+        class="month"
+        name="fromMonth"
+        id="fromMonth"
+        formControlName="fromMonth"
+      >
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+      </select>
+    </div>
 
-    <label for="to">To: </label>
-    <input class="input" id="to" type="text" formControlName="to" />
+    <div class="to-input">
+      <label for="to">To: </label>
+    </div>
+    <div>
+      <input class="input" id="to" type="text" formControlName="to" />
+      <select
+        class="month"
+        name="toMonth"
+        id="toMonth"
+        formControlName="toMonth"
+      >
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+      </select>
+    </div>
 
-    <label for="month">To Month: </label>
-    <select class="month" name="toMonth" id="toMonth" formControlName="toMonth">
-      <option value="June">June</option>
-      <option value="July">July</option>
-      <option value="August">August</option>
-      <option value="September">September</option>
-    </select>
 
-    <label for="unit">Unit: </label>
-    <select name="unit" id="unit" formControlName="unit">
-      <option value="N2">N2</option>
-      <option value="N3">N3</option>
-      <option value="N4">N4</option>
-      <option value="N5">N5</option>
-    </select>
   </form>
   <button class="add" type="button" (click)="onSubmitPeriod()">Add</button>
 </div>

@@ -38,6 +38,9 @@ td {
   background: repeating-linear-gradient(90deg, yellow 0px 10px, white 10px 30px, white 30px 40px);
 }
 
+.to-input {
+  margin-top: 20px;
+}
 
 form {
   margin: 20px;
@@ -54,4 +57,6 @@ form {
 
 .add {
   margin: 20px;
+  padding: 5px 15px;
+  width: 120px;
 }
