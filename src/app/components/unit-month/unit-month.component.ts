@@ -4,16 +4,12 @@ import { Booking } from '../../booking.model';
 @Component({
   selector: '[app-unit-month]',
   templateUrl: './unit-month.component.html',
-  styleUrls: ['./unit-month.component.scss']
+  styleUrls: ['./unit-month.component.scss'],
 })
 export class UnitMonthComponent implements OnInit {
+  constructor() {}
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-    console.log("bookings", this.bookings);
-  }
+  ngOnInit(): void {}
 
   @Input() bookings: Booking[] = [];
   @Input() unitName: string = '';

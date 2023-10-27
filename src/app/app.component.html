@@ -36,7 +36,6 @@
     </select>
   </form>
   <button class="add" type="button" (click)="onSubmitPeriod()">Add</button>
-  <button class="add" type="button" (click)="deleteBooking()">Delete</button>
 </div>
 <table>
   <th>June</th>
@@ -87,4 +86,5 @@
   [N3]="bookings.bookingsN3"
   [N4]="bookings.bookingsN4"
   [N5]="bookings.bookingsN5"
+  [bookings]="bookings"
 ></app-bookings-list>

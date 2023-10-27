@@ -22,20 +22,7 @@ export class AppComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-  }
-
-  deleteBooking() {
-    const { from, to, unit, fromMonth, toMonth } = this.period.value;
-
-    let res: string | null = prompt(
-      'Are you sure you want to delete booking? (yes/no)'
-    );
-
-    if (res === 'yes') {
-      //this.bookings.deleteBooking(from, to, unit, month);
-    }
-  }
+  ngOnInit(): void {}
 
   // TODO: this can move 'from' and 'to' period in existing booking period
   modifyBooking() {}

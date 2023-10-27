@@ -191,45 +191,11 @@ export class Bookings {
     }
   }
 
-  // TODO: refactor delete according to create
-  deleteBooking(from: number, to: number, unitName: string, month: string) {
-    const unit = this.getBookingByUnit(unitName, month);
-    unit?.map((d: Booking) => {
-      // days in between
-      if (d.day > from && d.day < to) {
-        d.booked = false;
-        d.isFirstDay = false;
-        d.isLastDay = false;
-      }
-
-      if (d.day == from) {
-        // edge case
-        if (d.isFirstDay && !d.isLastDay) {
-          d.isFirstDay = false;
-          d.booked = false;
-        }
-        if (d.isFirstDay && d.isLastDay) {
-          d.isFirstDay = false;
-          d.booked = true;
-        }
-      }
-
-      if (d.day == to) {
-        // edge case
-        if (d.isLastDay && !d.isFirstDay) {
-          d.isLastDay = false;
-          d.booked = false;
-        }
-        if (d.isLastDay && d.isFirstDay) {
-          d.isLastDay = false;
-          d.booked = true;
-        }
-      }
-    });
-  }
-
-  private isOneNight(element: Booking): boolean {
-    return element.booked;
+  private isOneNight(period: Booking[]): boolean {
+    if (period[1].isLastDay) {
+      return true;
+    }
+    return false;
   }
 
   private isFirstOrLastDay(element: Booking): boolean {
@@ -249,7 +215,7 @@ export class Bookings {
       let period: Booking[] = unit.slice(Number(from) - 1, Number(to));
 
       if (period.length <= 2) {
-        return period.some(this.isOneNight);
+        return this.isOneNight(period);
       } else {
         return period.some(this.isFirstOrLastDay);
       }
@@ -266,10 +232,103 @@ export class Bookings {
       const period: Booking[] = periodFrom.concat(periodTo);
 
       if (period.length <= 2) {
-        return period.some(this.isOneNight);
+        return this.isOneNight(period);
       } else {
         return period.some(this.isFirstOrLastDay);
       }
+    }
+  }
+
+  deleteUnitBooking(uB: UnitBookings) {
+    if (uB.unit == 'N2') {
+      this.markUnitFree(uB);
+      this.bookingsN2 = this.bookingsN2.filter((item) => item !== uB);
+    } else if (uB.unit == 'N3') {
+      this.markUnitFree(uB);
+      this.bookingsN3 = this.bookingsN3.filter((item) => item !== uB);
+    } else if (uB.unit == 'N4') {
+      this.markUnitFree(uB);
+      this.bookingsN4 = this.bookingsN4.filter((item) => item !== uB);
+    } else if (uB.unit == 'N5') {
+      this.markUnitFree(uB);
+      this.bookingsN5 = this.bookingsN5.filter((item) => item !== uB);
+    }
+  }
+
+  private markUnitFree(ub: UnitBookings) {
+    const from: number = Number(ub.from.split('.')[0]);
+    const fromMonth: string = ub.from.split('.')[1];
+    const to: number = Number(ub.to.split('.')[0]);
+    const toMonth: string = ub.to.split('.')[1];
+    const unitName: string = ub.unit;
+
+    // same month
+    if (fromMonth == toMonth) {
+      const unit = this.getBookingByUnit(unitName, fromMonth);
+      let period: Booking[] = unit.slice(Number(from) - 1, Number(to));
+
+      period?.map((d: Booking) => {
+        if (d.day == from) {
+          if (d.isLastDay) {
+            d.isFirstDay = false;
+          }
+          if (d.isFirstDay) {
+            d.isFirstDay = false;
+            d.booked = false;
+          }
+        } else if (d.day == to) {
+          if (d.isFirstDay) {
+            d.isLastDay = false;
+          }
+          if (d.isLastDay) {
+            d.isLastDay = false;
+            d.booked = false;
+          }
+        } else {
+          d.booked = false;
+          d.isLastDay = false;
+          d.isFirstDay = false;
+        }
+      });
+    }
+    // if booking spans for two months
+    else {
+      const unitFrom = this.getBookingByUnit(unitName, fromMonth);
+      let periodFrom: Booking[] = unitFrom.slice(
+        Number(from) - 1,
+        Number(this.getLastDayOfMonth(fromMonth))
+      );
+
+      periodFrom?.map((d: Booking) => {
+        if (d.isFirstDay && d.isLastDay) {
+          d.isFirstDay = false;
+        } else if (!d.isFirstDay && d.isLastDay) {
+          d.isLastDay = false;
+          d.booked = false;
+        } else if (d.isFirstDay && !d.isLastDay) {
+          d.isFirstDay = false;
+          d.booked = false;
+        } else {
+          d.booked = false;
+        }
+      });
+
+      const unitTo = this.getBookingByUnit(unitName, toMonth);
+      let periodTo: Booking[] = unitTo.slice(0, Number(to));
+
+      periodTo?.map((d: Booking) => {
+        if (d.isFirstDay && d.isLastDay) {
+          d.isLastDay = false;
+        } else if (d.isFirstDay && !d.isLastDay) {
+          d.isFirstDay = false;
+          d.booked = false;
+        } else if (!d.isFirstDay && d.isLastDay) {
+          d.isLastDay = false;
+          d.booked = false;
+        } else {
+          d.booked = false;
+        }
+      });
     }
   }
 }
