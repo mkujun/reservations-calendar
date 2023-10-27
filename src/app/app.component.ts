@@ -11,6 +11,10 @@ export class AppComponent implements OnInit {
   title = 'reservations-calendar';
   bookings: Bookings = new Bookings();
   period: FormGroup;
+  juneHidden: boolean = false;
+  julyHidden: boolean = false;
+  augustHidden: boolean = false;
+  septemberHidden: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.period = this.fb.group({
@@ -71,5 +75,21 @@ export class AppComponent implements OnInit {
     } else {
       alert('Form invalid');
     }
+  }
+
+  showHideJune() {
+    this.juneHidden = !this.juneHidden;
+  }
+
+  showHideJuly() {
+    this.julyHidden = !this.julyHidden;
+  }
+
+  showHideAugust() {
+    this.augustHidden = !this.augustHidden;
+  }
+
+  showHideSeptember() {
+    this.septemberHidden = !this.septemberHidden;
   }
 }

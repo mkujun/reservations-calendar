@@ -11,10 +11,10 @@
         id="fromMonth"
         formControlName="fromMonth"
       >
-        <option value=6>June</option>
-        <option value=7>July</option>
-        <option value=8>August</option>
-        <option value=9>September</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
       </select>
     </div>
 
@@ -29,10 +29,10 @@
         id="toMonth"
         formControlName="toMonth"
       >
-        <option value=6>June</option>
-        <option value=7>July</option>
-        <option value=8>August</option>
-        <option value=9>September</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
       </select>
     </div>
 
@@ -50,48 +50,72 @@
   </form>
 </div>
 <table>
-  <th>June</th>
-  <tr app-unit-month unitName="N2" [bookings]="bookings.bookingJune.N2"></tr>
-  <tr app-unit-month unitName="N3" [bookings]="bookings.bookingJune.N3"></tr>
-  <tr app-unit-month unitName="N4" [bookings]="bookings.bookingJune.N4"></tr>
-  <tr app-unit-month unitName="N5" [bookings]="bookings.bookingJune.N5"></tr>
+  <th (click)="showHideJune()">June</th>
+  <div *ngIf="!juneHidden">
+    <tr app-unit-month unitName="N2" [bookings]="bookings.bookingJune.N2"></tr>
+    <tr app-unit-month unitName="N3" [bookings]="bookings.bookingJune.N3"></tr>
+    <tr app-unit-month unitName="N4" [bookings]="bookings.bookingJune.N4"></tr>
+    <tr app-unit-month unitName="N5" [bookings]="bookings.bookingJune.N5"></tr>
+  </div>
 </table>
 <table>
-  <th>July</th>
-  <tr app-unit-month unitName="N2" [bookings]="bookings.bookingJuly.N2"></tr>
-  <tr app-unit-month unitName="N3" [bookings]="bookings.bookingJuly.N3"></tr>
-  <tr app-unit-month unitName="N4" [bookings]="bookings.bookingJuly.N4"></tr>
-  <tr app-unit-month unitName="N5" [bookings]="bookings.bookingJuly.N5"></tr>
+  <th (click)="showHideJuly()">July</th>
+  <div *ngIf="!julyHidden">
+    <tr app-unit-month unitName="N2" [bookings]="bookings.bookingJuly.N2"></tr>
+    <tr app-unit-month unitName="N3" [bookings]="bookings.bookingJuly.N3"></tr>
+    <tr app-unit-month unitName="N4" [bookings]="bookings.bookingJuly.N4"></tr>
+    <tr app-unit-month unitName="N5" [bookings]="bookings.bookingJuly.N5"></tr>
+  </div>
 </table>
 <table>
-  <th>August</th>
-  <tr app-unit-month unitName="N2" [bookings]="bookings.bookingAugust.N2"></tr>
-  <tr app-unit-month unitName="N3" [bookings]="bookings.bookingAugust.N3"></tr>
-  <tr app-unit-month unitName="N4" [bookings]="bookings.bookingAugust.N4"></tr>
-  <tr app-unit-month unitName="N5" [bookings]="bookings.bookingAugust.N5"></tr>
+  <th (click)="showHideAugust()">August</th>
+  <div *ngIf="!augustHidden">
+    <tr
+      app-unit-month
+      unitName="N2"
+      [bookings]="bookings.bookingAugust.N2"
+    ></tr>
+    <tr
+      app-unit-month
+      unitName="N3"
+      [bookings]="bookings.bookingAugust.N3"
+    ></tr>
+    <tr
+      app-unit-month
+      unitName="N4"
+      [bookings]="bookings.bookingAugust.N4"
+    ></tr>
+    <tr
+      app-unit-month
+      unitName="N5"
+      [bookings]="bookings.bookingAugust.N5"
+    ></tr>
+  </div>
 </table>
 <table>
-  <th>September</th>
-  <tr
-    app-unit-month
-    unitName="N2"
-    [bookings]="bookings.bookingSeptember.N2"
-  ></tr>
-  <tr
-    app-unit-month
-    unitName="N3"
-    [bookings]="bookings.bookingSeptember.N3"
-  ></tr>
-  <tr
-    app-unit-month
-    unitName="N4"
-    [bookings]="bookings.bookingSeptember.N4"
-  ></tr>
-  <tr
-    app-unit-month
-    unitName="N5"
-    [bookings]="bookings.bookingSeptember.N5"
-  ></tr>
+  <th (click)="showHideSeptember()">September</th>
+  <div *ngIf="!septemberHidden">
+    <tr
+      app-unit-month
+      unitName="N2"
+      [bookings]="bookings.bookingSeptember.N2"
+    ></tr>
+    <tr
+      app-unit-month
+      unitName="N3"
+      [bookings]="bookings.bookingSeptember.N3"
+    ></tr>
+    <tr
+      app-unit-month
+      unitName="N4"
+      [bookings]="bookings.bookingSeptember.N4"
+    ></tr>
+    <tr
+      app-unit-month
+      unitName="N5"
+      [bookings]="bookings.bookingSeptember.N5"
+    ></tr>
+  </div>
 </table>
 <app-bookings-list
   [N2]="bookings.bookingsN2"
