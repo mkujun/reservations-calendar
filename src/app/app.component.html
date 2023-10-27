@@ -1,6 +1,5 @@
 <div>
-  <form [formGroup]="period">
-
+  <form [formGroup]="period" (ngSubmit)="onSubmitPeriod()">
     <div>
       <label for="from">From: </label>
     </div>
@@ -38,7 +37,7 @@
     </div>
 
     <div class="to-input">
-     <label class="unit-label" for="unit">Unit: </label>
+      <label class="unit-label" for="unit">Unit: </label>
       <select name="unit" id="unit" formControlName="unit">
         <option value="N2">N2</option>
         <option value="N3">N3</option>
@@ -47,8 +46,8 @@
       </select>
     </div>
 
+    <button class="add" type="submit" [disabled]="period.invalid">Add</button>
   </form>
-  <button class="add" type="button" (click)="onSubmitPeriod()">Add</button>
 </div>
 <table>
   <th>June</th>

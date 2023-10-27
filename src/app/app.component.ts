@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Bookings } from 'src/domain/bookings';
 
 @Component({
@@ -9,33 +9,39 @@ import { Bookings } from 'src/domain/bookings';
 })
 export class AppComponent implements OnInit {
   title = 'reservations-calendar';
-
   bookings: Bookings = new Bookings();
+  period: FormGroup;
 
-  period = new FormGroup({
-    from: new FormControl(''),
-    to: new FormControl(''),
-    unit: new FormControl(''),
-    fromMonth: new FormControl(''),
-    toMonth: new FormControl(''),
-  });
-
-  constructor() {}
+  constructor(private fb: FormBuilder) {
+    this.period = this.fb.group({
+      from: ['', [Validators.required]],
+      to: ['', [Validators.required]],
+      unit: ['', [Validators.required]],
+      fromMonth: ['', [Validators.required]],
+      toMonth: ['', [Validators.required]],
+    });
+  }
 
   ngOnInit(): void {}
 
-  // TODO: this can move 'from' and 'to' period in existing booking period
+  // TODO
   modifyBooking() {}
 
   bookedAlert(): void {
     alert('booked');
   }
 
-  onSubmitPeriod() {
-    const { from, to, unit, fromMonth, toMonth } = this.period.value;
+  // TODO: check if date from is earlier in time than date to
 
-    this.bookings.isUnitBooked(from, to, fromMonth, toMonth, unit)
-      ? this.bookedAlert()
-      : this.bookings.createBooking(from, to, fromMonth, toMonth, unit);
+  onSubmitPeriod() {
+    if (this.period.valid) {
+      const { from, to, unit, fromMonth, toMonth } = this.period.value;
+
+      this.bookings.isUnitBooked(from, to, fromMonth, toMonth, unit)
+        ? this.bookedAlert()
+        : this.bookings.createBooking(from, to, fromMonth, toMonth, unit);
+    } else {
+      alert('Form invalid');
+    }
   }
 }
