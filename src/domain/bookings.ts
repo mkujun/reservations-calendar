@@ -192,7 +192,7 @@ export class Bookings {
   }
 
   private isOneNight(period: Booking[]): boolean {
-    if (period[1].isLastDay) {
+    if (period[1]?.isLastDay) {
       return true;
     }
     return false;
